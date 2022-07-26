@@ -1,16 +1,44 @@
- <%= render 'users/index', user:@user %>
- 
-  <div class= "col-md-8 offset-md-1" >
-    <h2>Book detail</h2>
-     <table class="table">
-       <tbody>
+<div class="container px-5 px-sm-0">
+  <div class="row ">
+   <%= render 'users/index', user:@user %>
+   <div class="col-md-8 offset-md-1">
+     <h2>Book detail</h2>
+     <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+           <th></th>
+           <th>Title</th>
+           <th>Opinion</th>
+           <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
         <tr>
-         <td><%= image_tag @user.get_profile_image(100,100) %></td>
-         <td><%= @book.title %></td>
+         <td>
+          <%= link_to "/users/#{@book.user.id}" do %>
+           <%= image_tag @book.user.get_profile_image(100,100) %><br>
+           <%= @user.name %>
+          <% end %>
+         </td>
+         <td>
+          <%= link_to @book.title, "/books/#{@book.id}" %>
+          </td>
          <td><%= @book.body %></td>
+         <td>
+          <% if @book.user == current_user %>
+           <%= link_to 'Edit', edit_book_path, class: 'btn btn-sm btn-success' %>
+          <% end %>
+         </td>
+         <td>
+          <% if @book.user == current_user %>
+           <%= link_to 'Destroy', book_path, method: :delete, "data-confirm" => "Are you sure?" , class: "btn btn-sm btn-danger" %>
+          <% end %>
+          </td>
         </tr>
        </tbody>
-      <table>
-   </div>
-   
-   
+      </table>
+    </div>
+
+  </div>
+</div>

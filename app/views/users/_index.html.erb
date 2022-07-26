@@ -1,5 +1,4 @@
 
-    <p id="notice"></p>
       <div class="col-md-3">
         <h2>User Info</h2>
         <%= image_tag user.get_profile_image(100,100) %>
@@ -11,19 +10,20 @@
             </tr>
             <tr>
               <th>Introduction</th>
-              <th>自己紹介</th>
+              <th><%= user.introduction %></th>
             </tr>
           </tbody>
         </table>
 
         <div class = "row">
           <a><%= link_to  edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
-            <i class="fa-solid fa-user-gear"></i>
+            <i class="fas fa-user-cog"></i>
           <% end %>
           </a>
         </div>
 
-        <h2>New Book</h2>
+        <h2>New book</h2>
+
         <%= form_with model:Book.new do |f| %>
 
           <h4>Title</h4>
@@ -32,7 +32,7 @@
           <h4>Opinion</h4>
           <%= f.text_area :body %>
 
-          <%= f.submit 'Create Book' %>
+          <%= f.submit 'Create Book', class: 'btn btn-sm btn-success'  %>
         <% end %>
 
       </div>
